@@ -65,6 +65,6 @@ https://github.com/nickjer/singularity-rstudio.
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License].
+The code is available as open source under the terms of the [MIT License].
 
 [MIT License]: http://opensource.org/licenses/MIT
