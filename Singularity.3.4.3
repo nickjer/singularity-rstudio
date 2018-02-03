@@ -17,6 +17,11 @@ From: nickjer/singularity-r:3.4.3
 %environment
   export PATH=/usr/lib/rstudio-server/bin:${PATH}
 
+%setup
+  install -Dv \
+    rstudio_auth.sh \
+    ${SINGULARITY_ROOTFS}/usr/lib/rstudio-server/bin/rstudio_auth
+
 %post
   # Software versions
   export RSTUDIO_VERSION=1.1.419

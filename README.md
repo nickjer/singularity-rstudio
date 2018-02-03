@@ -60,6 +60,26 @@ server:
 ...
 ```
 
+#### Add Authentication
+
+To secure the RStudio Server you will need to:
+
+1. Launch the container with the environment variable `RSTUDIO_PASSWORD` set to
+   a password of your choosing.
+2. Launch the `rserver` command with the PAM helper script `rstudio_auth`.
+
+An example is given as:
+
+```sh
+RSTUDIO_PASSWORD="password" singularity run singularity-rstudio.simg \
+  --auth-none 0 \
+  --auth-pam-helper rstudio_auth
+```
+
+Now when you attempt to access the RStudio Server you will be presented with a
+log in form. You can log in with your current user name and password you set in
+`RSTUDIO_PASSWORD`.
+
 ### R and Rscript
 
 See [nickjer/singularity-r] for more information on how to run `R` and
