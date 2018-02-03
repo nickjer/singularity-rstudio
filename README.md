@@ -1,10 +1,10 @@
 # Singularity RStudio Server
 
+[![Singularity Hub](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/463)
+[![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 Singularity image for [RStudio Server]. It was built on top of the base
 Singularity image [nickjer/singularity-r].
-
-[RStudio Server]: https://www.rstudio.com/products/rstudio/
-[nickjer/singularity-r]: https://github.com/nickjer/singularity-r
 
 This is still a work in progress.
 
@@ -94,4 +94,7 @@ https://github.com/nickjer/singularity-rstudio.
 
 The code is available as open source under the terms of the [MIT License].
 
+
+[RStudio Server]: https://www.rstudio.com/products/rstudio/
+[nickjer/singularity-r]: https://github.com/nickjer/singularity-r
 [MIT License]: http://opensource.org/licenses/MIT
