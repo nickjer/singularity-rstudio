@@ -1,8 +1,10 @@
 # Singularity RStudio Server
 
-Singularity image for [RStudio Server].
+Singularity image for [RStudio Server]. It was built on top of the base
+Singularity image [nickjer/singularity-r].
 
 [RStudio Server]: https://www.rstudio.com/products/rstudio/
+[nickjer/singularity-r]: https://github.com/nickjer/singularity-r
 
 This is still a work in progress.
 
@@ -57,6 +59,11 @@ server:
 
 ...
 ```
+
+### R and Rscript
+
+See [nickjer/singularity-r] for more information on how to run `R` and
+`Rscript` from within this Singularity image.
 
 ## Contributing
 
