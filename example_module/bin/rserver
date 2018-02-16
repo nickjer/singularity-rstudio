@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+for var in ${!RSTUDIO_SINGULARITY_*}; do
+  export SINGULARITY_${var#RSTUDIO_SINGULARITY_}="${!var}"
+done
+export SINGULARITY_WORKDIR="${SINGULARITY_WORKDIR:-$(mktemp -d)}"
+
+exec singularity exec rserver "${@}"
