@@ -22,3 +22,19 @@ setenv("RSTUDIO_SINGULARITY_HOST_MNT", host_mnt)
 setenv("RSTUDIO_SINGULARITY_CONTAIN", "1")
 setenv("RSTUDIO_SINGULARITY_HOME", os.getenv("HOME"))
 setenv("R_LIBS_USER", pathJoin(host_mnt, user_library))
+
+-- Note: Singularity on CentOS 6 fails to bind a directory to `/tmp` for some
+-- reason. This is necessary for RStudio Server to work in a multi-user
+-- environment. So to get around this we use a combination of:
+--
+--   - SINGULARITY_CONTAIN=1 (containerize /home, /tmp, and /var/tmp)
+--   - SINGULARITY_HOME=$HOME (set back the home directory)
+--   - SINGUARLITY_WORKDIR=$(mktemp -d) (bind a temp directory for /tmp and /var/tmp)
+--
+-- The last one is called from within the executable scripts found under `bin/`
+-- as it makes the temp directory at runtime.
+--
+-- If your system does successfully bind a directory over `/tmp`, then you can
+-- probably get away with just:
+--
+--   - SINGULARITY_BINDPATH=$(mktemp -d):/tmp,$SINGULARITY_BINDPATH
