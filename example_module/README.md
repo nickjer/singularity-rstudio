@@ -1,7 +1,11 @@
 # RStudio Server + Singularity Module
 
-This is an example module that sets up the environment necessary to launch
-RStudio Server.
+This is an example [Lmod] module that sets up the environment necessary to
+launch RStudio Server. It assumes a Singularity module already exists or that
+it is installed on the machine.
+
+*[Lmod] modules are typically used at most high-performance computing (HPC)
+centers.*
 
 ## Setup
 
@@ -27,7 +31,7 @@ above image as an example.
 Users may request that you install R packages. I am not entirely sure if
 installed packages work across major (`x`) or minor (`x.y`) version numbers. So
 to err on the side of caution I treat packages separate within minor versions
-of R.
+of R (feel free to inform me otherwise).
 
 1. Create a library for the corresponding R minor version if one doesn't
    already exist:
@@ -68,3 +72,5 @@ the `R_LIBS_USER` directory specified in the module file.
    ```R
    install.packages("my_package")
    ```
+
+[Lmod]: https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
