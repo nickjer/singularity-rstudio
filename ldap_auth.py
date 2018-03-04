@@ -9,7 +9,7 @@ Example usage:
 
     % export LDAP_CERT_FILE=/path/to/trusted_root_cert.pem
     % export LDAP_HOST=some.ldap.server.org
-    % export LDAP_USER_DN='CN=Users,DC=MyDomain,DC=com'
+    % export LDAP_USER_DN='CN=%s,CN=Users,DC=MyDomain,DC=com'
     % ldap_auth.py username && echo ok || echo failed
     Password:  # enter correct password
     Success
@@ -50,8 +50,9 @@ def main(arguments):
     )
     parser.add_argument(
         '--user-dn', default=getenv('LDAP_USER_DN'),
-        help="""Base DN for user search in LDAP directory (will look
-        something like "CN=Users,DC=MyDomain,DC=com"). Uses value of
+        help="""Base DN for user search in LDAP directory, including a
+        placeholder for USER (will look something like
+        "CN=%s,CN=Users,DC=MyDomain,DC=com"). Uses value of
         LDAP_USER_DN by default."""
     )
     parser.add_argument(
@@ -80,7 +81,7 @@ def main(arguments):
         ),
         auto_bind=False,
         client_strategy=ldap3.SYNC,
-        user='CN={},{}'.format(args.user, args.user_dn),
+        user=args.user_dn % args.user,
         password=password,
         raise_exceptions=True,
         check_names=True)

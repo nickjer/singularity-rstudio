@@ -87,14 +87,16 @@ server, you may use it to authenticate users to RStudio. You must
 first determine the following:
 
 1. The name of the LDAP host
-2. The base DN for users in the domain
+2. The base DN for users in the domain. A placeholder in the form '%s'
+   will be replaced by the username provided to RStudio at the time of
+   authentication.
 3. A public TLS certificate used for encryption of the LDAP session
 
 For example:
 
 ```sh
 export LDAP_HOST=your.ldap.server.org
-export LDAP_USER_DN='CN=Users,DC=MyDomain,DC=com'
+export LDAP_USER_DN='CN=%s,CN=Users,DC=MyDomain,DC=com'
 singularity run \
   --bind thawte_Primary_Root_CA.pem:/etc/ldap-cert.pem \
   singularity-rstudio.simg \
