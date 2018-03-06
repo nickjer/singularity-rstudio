@@ -51,10 +51,10 @@ of R (feel free to inform me otherwise).
 5. Install requested packages:
 
    ```R
-   install.packages("my_package", lib="/usr/local/lib/R/site-library")
+   install.packages("my_package", lib="/library")
    ```
 
-   and be sure it is writing to the path `/usr/local/lib/R/site-library`.
+   and be sure it is writing to the path `/library`.
 
 ### Locally Install Libraries
 
