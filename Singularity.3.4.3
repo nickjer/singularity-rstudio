@@ -21,6 +21,9 @@ From: nickjer/singularity-r:3.4.3
   install -Dv \
     rstudio_auth.sh \
     ${SINGULARITY_ROOTFS}/usr/lib/rstudio-server/bin/rstudio_auth
+  install -Dv \
+    ldap_auth.py \
+    ${SINGULARITY_ROOTFS}/usr/lib/rstudio-server/bin/ldap_auth
 
 %post
   # Software versions
@@ -31,13 +34,15 @@ From: nickjer/singularity-r:3.4.3
   apt-get install -y --no-install-recommends \
     ca-certificates \
     wget \
-    gdebi-core
+    gdebi-core \
+    python3-pip
   wget \
     --no-verbose \
     -O rstudio-server.deb \
     "https://download2.rstudio.org/rstudio-server-${RSTUDIO_VERSION}-amd64.deb"
   gdebi -n rstudio-server.deb
   rm -f rstudio-server.deb
+  pip3 install ldap3
 
   # Clean up
   rm -rf /var/lib/apt/lists/*

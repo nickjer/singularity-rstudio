@@ -60,7 +60,7 @@ server:
 ...
 ```
 
-#### Add Authentication
+#### Simple Password Authentication
 
 To secure the RStudio Server you will need to:
 
@@ -79,6 +79,46 @@ RSTUDIO_PASSWORD="password" singularity run singularity-rstudio.simg \
 Now when you attempt to access the RStudio Server you will be presented with a
 log in form. You can log in with your current user name and password you set in
 `RSTUDIO_PASSWORD`.
+
+#### LDAP Authentication
+
+If your institution provides access to an LDAP (or Active Directory)
+server, you may use it to authenticate users to RStudio. You must
+first determine the following requirements for your LDAP server:
+
+1. The name of the LDAP host
+2. The base DN for users in the domain. A placeholder in the form '%s'
+   will be replaced by the username provided to RStudio at the time of
+   authentication.
+3. The TLS certificate used for encryption of the LDAP session (need not
+   be specified if the default system certificate store is permitted).
+
+If the system cert file is accepted by the LDAP server:
+
+```sh
+export LDAP_HOST=your.ldap.server.org
+export LDAP_USER_DN='CN=%s,CN=Users,DC=MyDomain,DC=com'
+singularity run singularity-rstudio.simg
+  --auth-none 0 \
+  --auth-pam-helper-path ldap_auth
+```
+
+Otherwise:
+
+```sh
+export LDAP_HOST=your.ldap.server.org
+export LDAP_USER_DN='CN=%s,CN=Users,DC=MyDomain,DC=com'
+export LDAP_CERT_FILE=/etc/ldap-cert.pem
+singularity run \
+  --bind thawte_Primary_Root_CA.pem:/etc/ldap-cert.pem \
+  singularity-rstudio.simg \
+  --auth-none 0 \
+  --auth-pam-helper-path ldap_auth
+```
+
+Here the certificate file `thawte_Primary_Root_CA.pem` (used here only
+as an example) is bound to the specified path for the certificate in
+the image.
 
 ### R and Rscript
 
