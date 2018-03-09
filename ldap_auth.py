@@ -46,7 +46,7 @@ def main(arguments):
         '--cert-file', default=getenv('LDAP_CERT_FILE'),
         help="""Path to TLS certificate used for encrypting the
         connection to the LDAP server. Uses value of LDAP_CERT_FILE if
-        defined""")
+        defined.""")
     parser.add_argument(
         '--host', default=getenv('LDAP_HOST'),
         help="""Name of the LDAP host. Uses value of LDAP_HOST

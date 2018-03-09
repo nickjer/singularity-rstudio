@@ -82,43 +82,42 @@ log in form. You can log in with your current user name and password you set in
 
 #### LDAP Authentication
 
-If your institution provides access to an LDAP (or Active Directory)
-server, you may use it to authenticate users to RStudio. You must
-first determine the following requirements for your LDAP server:
+Another option is using an LDAP (or Active Directory) server for
+authentication. Configuration of the LDAP authentication script `ldap_auth` is
+handled through the following environment variables:
 
-1. The name of the LDAP host
-2. The base DN for users in the domain. A placeholder in the form '%s'
-   will be replaced by the username provided to RStudio at the time of
-   authentication.
-3. The TLS certificate used for encryption of the LDAP session (need not
-   be specified if the default system certificate store is permitted).
+- `LDAP_HOST` - the host name of the LDAP server
+- `LDAP_USER_DN` - the formatted string (where `%s` is replaced with the
+  username supplied during log in) of the bind DN used for LDAP authentication
+- `LDAP_CERT_FILE` - the file containing the CA certificates used by
+  the LDAP server (default: use system CA certificates)
 
-If the system cert file is accepted by the LDAP server:
+An example for an LDAP server with signed SSL certificate from a trusted CA:
 
 ```sh
-export LDAP_HOST=your.ldap.server.org
-export LDAP_USER_DN='CN=%s,CN=Users,DC=MyDomain,DC=com'
-singularity run singularity-rstudio.simg
+export LDAP_HOST=ldap.example.com
+export LDAP_USER_DN='cn=%s,dc=example,dc=com'
+singularity run singularity-rstudio.simg \
   --auth-none 0 \
   --auth-pam-helper-path ldap_auth
 ```
 
-Otherwise:
+An example for an LDAP server with a self-signed SSL certificate:
 
 ```sh
-export LDAP_HOST=your.ldap.server.org
-export LDAP_USER_DN='CN=%s,CN=Users,DC=MyDomain,DC=com'
-export LDAP_CERT_FILE=/etc/ldap-cert.pem
+export LDAP_HOST=ldap.example.com
+export LDAP_USER_DN='cn=%s,dc=example,dc=com'
+export LDAP_CERT_FILE=/ca-certs.pem
 singularity run \
-  --bind thawte_Primary_Root_CA.pem:/etc/ldap-cert.pem \
+  --bind /path/to/ca-certs.pem:/ca-certs.pem \
   singularity-rstudio.simg \
-  --auth-none 0 \
-  --auth-pam-helper-path ldap_auth
+    --auth-none 0 \
+    --auth-pam-helper-path ldap_auth
 ```
 
-Here the certificate file `thawte_Primary_Root_CA.pem` (used here only
-as an example) is bound to the specified path for the certificate in
-the image.
+Note that we had to bind mount the CA certificates file from the host machine
+into the container and specify the container's path in `LDAP_CERT_FILE` (not
+the host's path).
 
 ### R and Rscript
 
