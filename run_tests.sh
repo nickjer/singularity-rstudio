@@ -12,7 +12,7 @@ set -e
 set -x
 
 # Verify RStudio Server installation
-singularity exec rserver --verify-installation=1
+singularity exec rserver --verify-installation=1 --www-address=0.0.0.0 --www-port=9898
 
 # Verify default PAM auth helper script
 export RSTUDIO_PASSWORD="password"
