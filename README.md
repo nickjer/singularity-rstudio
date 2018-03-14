@@ -1,5 +1,6 @@
 # Singularity RStudio Server
 
+[![Build Status](https://travis-ci.org/nickjer/singularity-rstudio.svg?branch=master)](https://travis-ci.org/nickjer/singularity-rstudio)
 [![Singularity Hub](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/463)
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
