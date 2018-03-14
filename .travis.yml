@@ -1,0 +1,15 @@
+sudo: required
+dist: trusty
+language: generic
+before_script:
+  - curl -L -sS http://neuro.debian.net/lists/trusty.us-ca.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
+  - sudo apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9
+  - sudo apt-get update -qq
+  - sudo apt-get install singularity-container -y
+script:
+  - sudo singularity build singularity-rstudio.simg Singularity
+  - sudo singularity build singularity-rstudio.simg Singularity.3.4.3
+notifications:
+  email:
+    on_success: never
+    on_failure: always
