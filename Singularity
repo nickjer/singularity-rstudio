@@ -42,6 +42,8 @@ From: nickjer/singularity-r
     "https://download2.rstudio.org/rstudio-server-${RSTUDIO_VERSION}-amd64.deb"
   gdebi -n rstudio-server.deb
   rm -f rstudio-server.deb
+
+  # Add support for LDAP authentication
   pip3 install ldap3
 
   # Clean up
