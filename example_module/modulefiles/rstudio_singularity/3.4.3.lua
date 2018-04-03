@@ -20,7 +20,7 @@ prepend_path("RSTUDIO_SINGULARITY_BINDPATH", library .. ":/library", ",")
 setenv("RSTUDIO_SINGULARITY_IMAGE", img)
 setenv("RSTUDIO_SINGULARITY_HOST_MNT", host_mnt)
 setenv("RSTUDIO_SINGULARITY_CONTAIN", "1")
-setenv("RSTUDIO_SINGULARITY_HOME", os.getenv("HOME"))
+setenv("RSTUDIO_SINGULARITY_HOME", os.getenv("HOME") .. ":/home/" .. os.getenv("USER"))
 setenv("R_LIBS_USER", pathJoin(host_mnt, user_library))
 
 -- Note: Singularity on CentOS 6 fails to bind a directory to `/tmp` for some
