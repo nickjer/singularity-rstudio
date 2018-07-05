@@ -6,7 +6,6 @@ env:
     - SINGULARITY_IMAGE=singularity-rstudio.simg
   matrix:
     - SPEC=Singularity
-    - SPEC=Singularity.3.4.3
     - SPEC=Singularity.3.4.4
 before_install:
   - sudo apt-get update -qq
