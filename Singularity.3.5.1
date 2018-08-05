@@ -34,8 +34,7 @@ From: nickjer/singularity-r:3.5.1
   apt-get install -y --no-install-recommends \
     ca-certificates \
     wget \
-    gdebi-core \
-    python3-pip
+    gdebi-core
   wget \
     --no-verbose \
     -O rstudio-server.deb \
@@ -44,6 +43,12 @@ From: nickjer/singularity-r:3.5.1
   rm -f rstudio-server.deb
 
   # Add support for LDAP authentication
+  wget \
+    --no-verbose \
+    -O get-pip.py \
+    "https://bootstrap.pypa.io/get-pip.py"
+  python3 get-pip.py
+  rm -f get-pip.py
   pip3 install ldap3
 
   # Clean up
