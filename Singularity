@@ -34,7 +34,15 @@ From: nickjer/singularity-r
   apt-get install -y --no-install-recommends \
     ca-certificates \
     wget \
-    gdebi-core
+    gdebi-core \
+    libudunits2-dev \
+    libgtk2.0-dev \
+    libcairo2-dev \
+    libxt-dev \
+    xauth \
+    xfonts-base \
+    libcairo2-dev \
+    libssl-dev
   wget \
     --no-verbose \
     -O rstudio-server.deb \
@@ -53,3 +61,7 @@ From: nickjer/singularity-r
 
   # Clean up
   rm -rf /var/lib/apt/lists/*
+
+  # Link lapack
+  ln -s /usr/lib/R/modules/lapack.so /usr/lib/libRlapack.so
+  ln -s /usr/lib/libR.so /usr/lib/libRblas.so
