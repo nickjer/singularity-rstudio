@@ -3,7 +3,7 @@ From: nickjer/singularity-r
 
 %labels
   Maintainer Jeremy Nicklas
-  RStudio_Version 1.1.456
+  RStudio_Version 1.1.463
 
 %help
   This will run RStudio Server
@@ -27,7 +27,7 @@ From: nickjer/singularity-r
 
 %post
   # Software versions
-  export RSTUDIO_VERSION=1.1.456
+  export RSTUDIO_VERSION=1.1.463
 
   # Install RStudio Server
   apt-get update
