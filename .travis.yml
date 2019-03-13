@@ -7,8 +7,7 @@ env:
   matrix:
     - SPEC=Singularity
     - SPEC=Singularity.3.4.4
-    - SPEC=Singularity.3.5.1
-    - SPEC=Singularity.3.5.2
+    - SPEC=Singularity.3.5.3
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y squashfs-tools curl
