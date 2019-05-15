@@ -3,7 +3,7 @@ From: nickjer/singularity-r
 
 %labels
   Maintainer Jeremy Nicklas
-  RStudio_Version 1.1.463
+  RStudio_Version 1.2.1335
 
 %help
   This will run RStudio Server
@@ -27,7 +27,7 @@ From: nickjer/singularity-r
 
 %post
   # Software versions
-  export RSTUDIO_VERSION=1.1.463
+  export RSTUDIO_VERSION=1.2.1335
 
   # Install RStudio Server
   apt-get update
@@ -38,7 +38,7 @@ From: nickjer/singularity-r
   wget \
     --no-verbose \
     -O rstudio-server.deb \
-    "https://download2.rstudio.org/rstudio-server-${RSTUDIO_VERSION}-amd64.deb"
+    "https://download2.rstudio.org/server/trusty/amd64/rstudio-server-${RSTUDIO_VERSION}-amd64.deb"
   gdebi -n rstudio-server.deb
   rm -f rstudio-server.deb
 
