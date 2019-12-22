@@ -1,5 +1,5 @@
 BootStrap: shub
-From: nickjer/singularity-r:3.6.2
+From: nickjer/singularity-r
 
 %labels
   Maintainer Jeremy Nicklas
