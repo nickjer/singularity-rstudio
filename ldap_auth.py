@@ -19,7 +19,7 @@ Example usage:
     LDAPInvalidCredentialsResult - 49 - invalidCredentials - None - 80090308: LdapErr: DSID-0C09042F, comment: AcceptSecurityContext error, data 52e, v2580 - bindResponse - None
     failed
 
-[0] A certificate file is only required if mandared by the LDAP host
+[0] A certificate file is only required if mandated by the LDAP host
 and the default system certificate store is not accepted by the LDAP
 server.
 
