@@ -49,7 +49,7 @@ From: nickjer/singularity-r:3.6.2
     "https://bootstrap.pypa.io/get-pip.py"
   python3 get-pip.py
   rm -f get-pip.py
-  pip3 install ldap3
+  pip3 install 'ldap3==2.9'
 
   # Clean up
   rm -rf /var/lib/apt/lists/*

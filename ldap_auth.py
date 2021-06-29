@@ -19,8 +19,9 @@ Example usage:
     LDAPInvalidCredentialsResult - 49 - invalidCredentials - None - 80090308: LdapErr: DSID-0C09042F, comment: AcceptSecurityContext error, data 52e, v2580 - bindResponse - None
     failed
 
-[0] A certificate file is only required if the default system
-certificate store is not accepted by the LDAP server.
+[0] A certificate file is only required if mandated by the LDAP host
+and the default system certificate store is not accepted by the LDAP
+server.
 
 """
 
@@ -77,8 +78,7 @@ def main(arguments):
             use_ssl=True,
             tls=ldap3.Tls(
                 ca_certs_file=args.cert_file,
-                # validate=ssl.CERT_NONE,
-                validate=ssl.CERT_REQUIRED,
+                validate=ssl.CERT_OPTIONAL,
             ),
             get_info=ldap3.NONE,
             connect_timeout=args.timeout,
