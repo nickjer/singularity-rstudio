@@ -27,7 +27,7 @@ From: nickjer/singularity-r
 
 %post
   # Software versions
-  export RSTUDIO_VERSION=1.2.5033
+  export RSTUDIO_VERSION=0.91.10
 
   # Install RStudio Server
   apt-get update
