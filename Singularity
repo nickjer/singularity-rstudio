@@ -1,9 +1,9 @@
 BootStrap: shub
-From: nickjer/singularity-r
+From: ubuntu:20.04
 
 %labels
-  Maintainer Jeremy Nicklas
-  RStudio_Version 1.2.5033
+  Maintainer Jeremy Nicklas, Roy Oelen
+  RStudio_Version 0.91.10
 
 %help
   This will run RStudio Server
@@ -38,7 +38,7 @@ From: nickjer/singularity-r
   wget \
     --no-verbose \
     -O rstudio-server.deb \
-    "https://download2.rstudio.org/server/trusty/amd64/rstudio-server-${RSTUDIO_VERSION}-amd64.deb"
+    "https://download2.rstudio.org/server/focal/amd64/rstudio-server-${RSTUDIO_VERSION}-amd64.deb"
   gdebi -n rstudio-server.deb
   rm -f rstudio-server.deb
 
