@@ -63,7 +63,8 @@ From: ubuntu:20.04
     libxml2-dev \
     libcairo2-dev \
     libxt-dev \
-    libopenblas-dev
+    libopenblas-dev \
+    libgeos-dev
 
   # Add a default CRAN mirror
   echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" >> /usr/lib/R/etc/Rprofile.site
@@ -95,8 +96,27 @@ From: ubuntu:20.04
   pip3 install 'ldap3==2.9'
   chmod u+r /etc/rstudio/database.conf
 
+  # set the server directory to be in /home, because the container is not writeable
   echo "directory=~/rstudio-server" >> /etc/rstudio/database.conf
-  echo "server-data-dir/=~/rstudio-server" >> /etc/rstudio/rsession.conf
+
+  # install r packages
+  R --slave -e 'install.packages("devtools")'
+  R --slave -e 'install.packages("BiocManager")'
+
+  R --slave -e 'install.packages("reshape2")'
+  R --slave -e 'install.packages("plyr")'
+  R --slave -e 'install.packages("dplyr")'
+  R --slave -e 'install.packages("ggridges")'
+  R --slave -e 'install.packages("Seurat")'
+
+  R --slave -e 'BiocManager::install("MAST")'
+  R --slave -e 'BiocManager::install("variancePartition")'
+  R --slave -e 'BiocManager::install("edgeR")'
+  R --slave -e 'BiocManager::install("BiocParallel")'
+
+
+  #R --slave -e 'devtools::install_github("immunogenomics/harmony")'
+
 
   # Clean up
   rm -rf /var/lib/apt/lists/*
