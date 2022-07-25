@@ -1,4 +1,4 @@
-BootStrap: shub
+BootStrap: docker
 From: ubuntu:20.04
 
 %labels
@@ -27,7 +27,7 @@ From: ubuntu:20.04
 
 %post
   # Software versions
-  export RSTUDIO_VERSION=0.91.10
+  export RSTUDIO_VERSION=2022.07.0-548
 
   # Get dependencies
   apt-get update
@@ -81,7 +81,7 @@ From: ubuntu:20.04
   wget \
     --no-verbose \
     -O rstudio-server.deb \
-    "https://download2.rstudio.org/server/focal/amd64/rstudio-server-${RSTUDIO_VERSION}-amd64.deb"
+    "https://download2.rstudio.org/server/bionic/amd64/rstudio-server-${RSTUDIO_VERSION}-amd64.deb"
   gdebi -n rstudio-server.deb
   rm -f rstudio-server.deb
 
@@ -93,6 +93,10 @@ From: ubuntu:20.04
   python3 get-pip.py
   rm -f get-pip.py
   pip3 install 'ldap3==2.9'
+  chmod u+r /etc/rstudio/database.conf
+
+  echo "directory=~/rstudio-server" >> /etc/rstudio/database.conf
+  echo "server-data-dir/=~/rstudio-server" >> /etc/rstudio/rsession.conf
 
   # Clean up
   rm -rf /var/lib/apt/lists/*
