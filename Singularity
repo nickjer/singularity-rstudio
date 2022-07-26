@@ -64,7 +64,13 @@ From: ubuntu:20.04
     libcairo2-dev \
     libxt-dev \
     libopenblas-dev \
-    libgeos-dev
+    libgeos-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev
 
   # Add a default CRAN mirror
   echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" >> /usr/lib/R/etc/Rprofile.site
@@ -114,8 +120,7 @@ From: ubuntu:20.04
   R --slave -e 'BiocManager::install("edgeR")'
   R --slave -e 'BiocManager::install("BiocParallel")'
 
-
-  #R --slave -e 'devtools::install_github("immunogenomics/harmony")'
+  R --slave -e 'devtools::install_github("immunogenomics/harmony")'
 
 
   # Clean up
