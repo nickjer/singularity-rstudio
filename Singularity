@@ -71,7 +71,8 @@ From: ubuntu:20.04
     libpng-dev \
     libtiff5-dev \
     libjpeg-dev \
-    cmake
+    cmake \
+    libhdf5-serial-dev
 
   # Add a default CRAN mirror
   echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" >> /usr/lib/R/etc/Rprofile.site
@@ -115,14 +116,29 @@ From: ubuntu:20.04
   R --slave -e 'install.packages("dplyr")'
   R --slave -e 'install.packages("ggridges")'
   R --slave -e 'install.packages("Seurat")'
+  R --slave -e 'install.packages("MatrixEQTL")'
+  R --slave -e 'install.packages("mlrMBO")'
+  R --slave -e 'install.packages("circlize")'
+  R --slave -e 'install.packages("vcfR")'
 
   R --slave -e 'BiocManager::install("MAST")'
   R --slave -e 'BiocManager::install("variancePartition")'
   R --slave -e 'BiocManager::install("edgeR")'
   R --slave -e 'BiocManager::install("BiocParallel")'
+  R --slave -e 'BiocManager::install("DESeq2")'
+  R --slave -e 'BiocManager::install("VariantAnnotation")'
+  R --slave -e 'BiocManager::install("SingleR")'
+  R --slave -e 'BiocManager::install("OmnipathR")'
 
   R --slave -e 'devtools::install_github("immunogenomics/harmony")'
-
+  R --slave -e 'devtools::install_github("sqjin/CellChat")'
+  R --slave -e 'devtools::install_github("saeyslab/nichenetr")'
+  R --slave -e 'devtools::install_github("JinmiaoChenLab/Rphenograph")'
+  R --slave -e 'devtools::install_github("velocyto-team/velocyto.R")'
+  R --slave -e 'devtools::install_github(repo = "hhoeflin/hdf5r")'
+  R --slave -e 'devtools::install_github(repo = "mojaveazure/loomR", ref = "develop")'
+  R --slave -e 'devtools::install_github("pcahan1/singleCellNet")'
+  R --slave -e 'devtools::install_github("powellgenomicslab/scPred")'
 
   # Clean up
   rm -rf /var/lib/apt/lists/*
