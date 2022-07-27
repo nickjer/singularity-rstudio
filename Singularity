@@ -123,6 +123,7 @@ From: ubuntu:20.04
   R --slave -e 'install.packages("vcfR")'
   R --slave -e 'install.packages("hexbin")'
   R --slave -e 'install.packages("cowplot")'
+  R --slave -e 'install.packages("tidyverse")'
 
   R --slave -e 'BiocManager::install("MAST")'
   R --slave -e 'BiocManager::install("variancePartition")'
