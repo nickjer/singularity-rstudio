@@ -72,7 +72,8 @@ From: ubuntu:20.04
     libtiff5-dev \
     libjpeg-dev \
     cmake \
-    libhdf5-serial-dev
+    libhdf5-serial-dev \
+    libboost-all-dev
 
   # Add a default CRAN mirror
   echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" >> /usr/lib/R/etc/Rprofile.site
@@ -120,6 +121,8 @@ From: ubuntu:20.04
   R --slave -e 'install.packages("mlrMBO")'
   R --slave -e 'install.packages("circlize")'
   R --slave -e 'install.packages("vcfR")'
+  R --slave -e 'install.packages("hexbin")'
+  R --slave -e 'install.packages("cowplot")'
 
   R --slave -e 'BiocManager::install("MAST")'
   R --slave -e 'BiocManager::install("variancePartition")'
@@ -129,6 +132,9 @@ From: ubuntu:20.04
   R --slave -e 'BiocManager::install("VariantAnnotation")'
   R --slave -e 'BiocManager::install("SingleR")'
   R --slave -e 'BiocManager::install("OmnipathR")'
+  R --slave -e 'BiocManager::install("ComplexHeatmap")'
+  R --slave -e 'BiocManager::install("pcaMethods")'
+
 
   R --slave -e 'devtools::install_github("immunogenomics/harmony")'
   R --slave -e 'devtools::install_github("sqjin/CellChat")'
