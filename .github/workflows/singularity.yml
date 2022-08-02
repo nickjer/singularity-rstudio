@@ -2,7 +2,7 @@ name: Build Singularity Container
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
 jobs:
   build-singularity:
     runs-on: ubuntu-latest
