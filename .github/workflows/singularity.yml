@@ -1,0 +1,25 @@
+name: Build Singularity Container
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build-singularity:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/singularity/singularity:v3.10.0
+      options: --privileged
+
+    name: Build singularity container
+    steps:
+      - name: Check out code for the container builds
+        uses: actions/checkout@v2
+
+      - name: Build Container
+        run: |
+          sudo -E singularity build container.sif Singularity
+      - name: Login
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
+      - name: Deploy Container
+        run: singularity push container.sif oras://ghcr.io/${GITHUB_REPOSITORY}:latest || singularity push container.sif oras://ghcr.io/${GITHUB_REPOSITORY}:latest || singularity push container.sif oras://ghcr.io/${GITHUB_REPOSITORY}:latest
