@@ -137,6 +137,7 @@ From: ubuntu:20.04
   R --slave -e 'BiocManager::install("ComplexHeatmap")'
   R --slave -e 'BiocManager::install("pcaMethods")'
   R --slave -e 'BiocManager::install("clusterProfiler")'
+  #R --slave -e 'BiocManager::install("organism", character.only = TRUE)'
   R --slave -e 'BiocManager::install("organism")'
   R --slave -e 'BiocManager::install("enrichplot")'
   R --slave -e 'BiocManager::install("pathview")'
