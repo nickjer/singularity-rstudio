@@ -124,6 +124,7 @@ From: ubuntu:20.04
   R --slave -e 'install.packages("hexbin")'
   R --slave -e 'install.packages("cowplot")'
   R --slave -e 'install.packages("tidyverse")'
+  R --slave -e 'install.packages("ggnewscale")'
 
   R --slave -e 'BiocManager::install("MAST")'
   R --slave -e 'BiocManager::install("variancePartition")'
@@ -135,7 +136,11 @@ From: ubuntu:20.04
   R --slave -e 'BiocManager::install("OmnipathR")'
   R --slave -e 'BiocManager::install("ComplexHeatmap")'
   R --slave -e 'BiocManager::install("pcaMethods")'
-
+  R --slave -e 'BiocManager::install("clusterProfiler")'
+  #R --slave -e 'BiocManager::install("organism", character.only = TRUE)'
+  R --slave -e 'BiocManager::install("organism")'
+  R --slave -e 'BiocManager::install("enrichplot")'
+  R --slave -e 'BiocManager::install("pathview")'
 
   R --slave -e 'devtools::install_github("immunogenomics/harmony")'
   R --slave -e 'devtools::install_github("sqjin/CellChat")'

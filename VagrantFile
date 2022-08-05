@@ -1,0 +1,12 @@
+# Enable the experimental disks feature via environment variable, requires Vagrant >=2.2.8.
+ENV["VAGRANT_EXPERIMENTAL"] = "disks"
+
+
+Vagrant.configure("2") do |config|
+  config.vm.define "sylabs" do |h|
+    h.vm.box = "sylabs/singularity-3.7-ubuntu-bionic64"
+    h.vm.provider :virtualbox
+    h.vm.disk :disk, size: "50GB", primary: true
+  end
+  config.vm.network "forwarded_port", guest: 8787, host: 8787
+end
