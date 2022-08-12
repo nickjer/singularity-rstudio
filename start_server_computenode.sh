@@ -2,6 +2,7 @@ mkdir -p ${TMPDIR}/rstudio-server-logging
 mkdir -p ${TMPDIR}/etc
 mkdir -p ${TMPDIR}/tmp
 mkdir -p ${TMPDIR}/server-data
+mkdir -p ${TMPDIR}/lib
 echo "www-port=8765" > ${TMPDIR}/etc/rserver.conf
 conda activate rstudio-server_env && \
 singularity run  --bind /groups/umcg-wijmenga/tmp01/users/umcg-roelen/singularity/rstudio-server/simulated_home:/home/umcg-roelen,\
@@ -9,6 +10,7 @@ singularity run  --bind /groups/umcg-wijmenga/tmp01/users/umcg-roelen/singularit
 /groups/umcg-wijmenga/tmp01/,\
 /groups/umcg-bios/tmp01/,\
 /groups/umcg-weersma/tmp01/,\
+/groups/umcg-lifelines/tmp01/,\
 ${TMPDIR},\
 ${TMPDIR}/rstudio-server-logging:/var/run/rstudio-server,\
 ${TMPDIR}/lib:/var/lib/rstudio-server,\

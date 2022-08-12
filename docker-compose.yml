@@ -1,0 +1,11 @@
+version: "3"
+services:
+    server:
+        # replace username/repo:tag with your name and image details
+        image: single-cell-container-server
+        build: ./
+        ports:
+            - "8787:8787"
+        environment:
+            - LC_ALL=en_US.UTF-8
+            - LANG=en_US.UTF-8

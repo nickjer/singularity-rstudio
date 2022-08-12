@@ -1,0 +1,133 @@
+# syntax=docker/dockerfile:1
+FROM ubuntu:20.04
+
+# Software versions
+ENV RSTUDIO_VERSION=2022.07.0-548
+
+# Get dependencies
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
+locales
+
+# Configure default locale
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+RUN locale-gen en_US.utf8
+RUN /usr/sbin/update-locale LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+
+# Install R
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
+    software-properties-common \
+    dirmngr \
+    wget
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | \
+    tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+RUN add-apt-repository \
+    "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+RUN apt-get install -y --no-install-recommends \
+    r-base=${R_VERSION}* \
+    r-base-core=${R_VERSION}* \
+    r-base-dev=${R_VERSION}* \
+    r-recommended=${R_VERSION}* \
+    r-base-html=${R_VERSION}* \
+    r-doc-html=${R_VERSION}* \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    libcairo2-dev \
+    libxt-dev \
+    libopenblas-dev \
+    libgeos-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev \
+    cmake \
+    libhdf5-serial-dev \
+    libboost-all-dev
+
+# Add a default CRAN mirror
+RUN echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" >> /usr/lib/R/etc/Rprofile.site
+
+# Add a directory for host R libraries
+RUN mkdir -p /library
+RUN echo "R_LIBS_SITE=/library:\${R_LIBS_SITE}" >> /usr/lib/R/etc/Renviron.site
+
+# Install RStudio Server
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+    gdebi-core
+RUN wget \
+    --no-verbose \
+    -O rstudio-server.deb \
+    "https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.07.0-548-amd64.deb"
+RUN gdebi -n rstudio-server.deb
+RUN rm -f rstudio-server.deb
+
+# Add support for LDAP authentication
+RUN wget \
+    --no-verbose \
+    -O get-pip.py \
+    "https://bootstrap.pypa.io/get-pip.py"
+RUN python3 get-pip.py
+RUN rm -f get-pip.py
+RUN pip3 install 'ldap3==2.9'
+RUN chmod u+r /etc/rstudio/database.conf
+
+# set the server directory to be in /home, because the container is not writeable
+RUN echo "directory=~/rstudio-server" >> /etc/rstudio/database.conf
+
+# install r packages
+RUN R --slave -e 'install.packages("devtools")'
+RUN R --slave -e 'install.packages("BiocManager")'
+
+RUN R --slave -e 'install.packages("reshape2")'
+RUN R --slave -e 'install.packages("plyr")'
+RUN R --slave -e 'install.packages("dplyr")'
+RUN R --slave -e 'install.packages("ggridges")'
+RUN R --slave -e 'install.packages("Seurat")'
+RUN R --slave -e 'install.packages("MatrixEQTL")'
+RUN R --slave -e 'install.packages("mlrMBO")'
+RUN R --slave -e 'install.packages("circlize")'
+RUN R --slave -e 'install.packages("vcfR")'
+RUN R --slave -e 'install.packages("hexbin")'
+RUN R --slave -e 'install.packages("cowplot")'
+RUN R --slave -e 'install.packages("tidyverse")'
+RUN R --slave -e 'install.packages("ggnewscale")'
+
+RUN R --slave -e 'BiocManager::install("MAST")'
+RUN R --slave -e 'BiocManager::install("variancePartition")'
+RUN R --slave -e 'BiocManager::install("edgeR")'
+RUN R --slave -e 'BiocManager::install("BiocParallel")'
+RUN R --slave -e 'BiocManager::install("DESeq2")'
+RUN R --slave -e 'BiocManager::install("VariantAnnotation")'
+RUN R --slave -e 'BiocManager::install("SingleR")'
+RUN R --slave -e 'BiocManager::install("OmnipathR")'
+RUN R --slave -e 'BiocManager::install("ComplexHeatmap")'
+RUN R --slave -e 'BiocManager::install("pcaMethods")'
+RUN R --slave -e 'BiocManager::install("clusterProfiler")'
+#RUN R --slave -e 'BiocManager::install("organism", character.only = TRUE)'
+RUN R --slave -e 'BiocManager::install("organism")'
+RUN R --slave -e 'BiocManager::install("enrichplot")'
+RUN R --slave -e 'BiocManager::install("pathview")'
+
+RUN R --slave -e 'devtools::install_github("immunogenomics/harmony")'
+RUN R --slave -e 'devtools::install_github("sqjin/CellChat")'
+RUN R --slave -e 'devtools::install_github("saeyslab/nichenetr")'
+RUN R --slave -e 'devtools::install_github("JinmiaoChenLab/Rphenograph")'
+RUN R --slave -e 'devtools::install_github("velocyto-team/velocyto.R")'
+RUN R --slave -e 'devtools::install_github(repo = "hhoeflin/hdf5r")'
+RUN R --slave -e 'devtools::install_github(repo = "mojaveazure/loomR", ref = "develop")'
+RUN R --slave -e 'devtools::install_github("pcahan1/singleCellNet")'
+RUN R --slave -e 'devtools::install_github("powellgenomicslab/scPred")'
+
+
+EXPOSE 8787
+ENTRYPOINT ['rserver']
+CMD ['rserver']
