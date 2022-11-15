@@ -74,6 +74,8 @@ From: ubuntu:20.04
     cmake \
     libhdf5-serial-dev \
     libboost-all-dev
+  apt-get install -y libudunits2-dev
+  apt-get install -y libgdal-dev
 
   # Add a default CRAN mirror
   echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" >> /usr/lib/R/etc/Rprofile.site
@@ -112,6 +114,8 @@ From: ubuntu:20.04
   R --slave -e 'install.packages("devtools")'
   R --slave -e 'install.packages("BiocManager")'
 
+  R --slave -e 'install.packages("R.utils")'
+  R --slave -e 'install.packages("optparse")'
   R --slave -e 'install.packages("reshape2")'
   R --slave -e 'install.packages("plyr")'
   R --slave -e 'install.packages("dplyr")'
@@ -125,6 +129,13 @@ From: ubuntu:20.04
   R --slave -e 'install.packages("cowplot")'
   R --slave -e 'install.packages("tidyverse")'
   R --slave -e 'install.packages("ggnewscale")'
+  R --slave -e 'install.packages("enrichR")'
+  R --slave -e 'install.packages("hexbin")'
+  R --slave -e 'install.packages("ggpubr")'
+  R --slave -e 'install.packages("rmarkdown", dep = TRUE)'
+  R --slave -e 'install.packages("ggvenn")'
+
+  R --slave -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/Matrix.utils/Matrix.utils_0.9.8.tar.gz", repos=NULL)'
 
   R --slave -e 'BiocManager::install("MAST")'
   R --slave -e 'BiocManager::install("variancePartition")'
@@ -151,6 +162,7 @@ From: ubuntu:20.04
   R --slave -e 'devtools::install_github(repo = "mojaveazure/loomR", ref = "develop")'
   R --slave -e 'devtools::install_github("pcahan1/singleCellNet")'
   R --slave -e 'devtools::install_github("powellgenomicslab/scPred")'
+  R --slave -e 'devtools::install_github("gaospecial/ggVennDiagram")'
 
   # Clean up
   rm -rf /var/lib/apt/lists/*
