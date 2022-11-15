@@ -29,6 +29,10 @@ https://drive.google.com/file/d/1fXIQncg7S3kp_MByydyqkQsssX0XgJ8_/view?usp=shari
 From the vagrant box, the singularity image can be started with:
 
 ```sh
+mkdir -p /home/vagrant/rstudio-server-logging/
+mkdir -p /home/vagrant/lib/
+mkdir -p /home/vagrant/etc/
+mkdir -p /home/vagrant/tmp/
 echo "www-port=8787" > /home/vagrant/etc/rserver.conf
 echo "auth-minimum-user-id=100" > /home/vagrant/etc/rserver.conf
 singularity run \
