@@ -1,4 +1,3 @@
-conda activate rstudio-server_env && \
 singularity run  --bind /groups/umcg-wijmenga/tmp01/users/umcg-roelen/singularity/rstudio-server/simulated_home:/home/umcg-roelen,\
 /groups/umcg-franke-scrna/tmp01/,\
 /groups/umcg-wijmenga/tmp01/,\
