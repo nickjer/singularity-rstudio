@@ -34,7 +34,7 @@ mkdir -p /home/vagrant/lib/
 mkdir -p /home/vagrant/etc/
 mkdir -p /home/vagrant/tmp/
 echo "www-port=8787" > /home/vagrant/etc/rserver.conf
-echo "auth-minimum-user-id=100" > /home/vagrant/etc/rserver.conf
+echo "auth-minimum-user-id=100" >> /home/vagrant/etc/rserver.conf
 singularity run \
 --bind /home/vagrant/rstudio-server-logging/:/var/run/rstudio-server/,\
 /home/vagrant/lib/:/var/lib/rstudio-server/,\
