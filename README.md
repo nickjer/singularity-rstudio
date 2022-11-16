@@ -1,6 +1,7 @@
 # Singularity RStudio Server
 
-Singularity image for [RStudio Server]. It was built based on the work of nickjer at nickjer/singularity-rstudio. Most important differences are updates to make it work on more recent software, and the removal of the dependency on the base r singularity image
+Singularity image for [RStudio Server]. It was built based on the work of nickjer at nickjer/singularity-rstudio. Most important differences are updates to make it work on more recent software, and the removal of the dependency on the base r singularity image.
+Additionally, libraries and dependencies were added for the use of work with single-cell RNA-seq data.
 
 This is still a work in progress.
 
@@ -179,6 +180,8 @@ now you should be able to go to localhost:8787 (or an other port if you chose a 
 If you lose your internet connection (due to your laptop going into sleep mode for example), you can re-execute the previous command again to get back the forwarding of your local port to the port on the cluster. You might have to reload the webpage as well.
 
 When you want to stop the server (due to a hangup or because you need the interactive session for something else), you can reconnect on the cluster to the screen session (by the name you gave it, or the ID it has, see *screen -ls* for example), and killing it with CTRL+C.
+
+Using the settings supplied in the examples here, you will have a home directory for the image, that is separate from your regular home directory. This will allow you to install additional R libraries to use with the container, without it interfering with locaal R installations. (The simulated home directory for the example would be */groups/umcg-weersma/tmp01/users/${USER}/singularity/rstudio-server/simulated_home/*)
 
 
 #### Peregrine cluster
