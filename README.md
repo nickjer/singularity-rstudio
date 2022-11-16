@@ -58,8 +58,8 @@ ls -lah ~
 
 for each of these two folders, if they exist they need to be moved:
 ```sh
-mv .singularity /groups/umcg-weersma/tmp01/user/${USER}/
-mv singularity /groups/umcg-weersma/tmp01/user/${USER}/
+mv ~/.singularity /groups/umcg-weersma/tmp01/user/${USER}/
+mv ~/singularity /groups/umcg-weersma/tmp01/user/${USER}/
 ```
 
 if they don’t exist they need to made in the new location:
@@ -175,6 +175,10 @@ ssh -N -f -L localhost:8787:localhost:8777 umcg-username@airlock+gs-vcompute09
 ```
 
 now you should be able to go to localhost:8787 (or an other port if you chose a different local port, and be connect to rstudio on the cluster)
+
+If you lose your internet connection (due to your laptop going into sleep mode for example), you can re-execute the previous command again to get back the forwarding of your local port to the port on the cluster. You might have to reload the webpage as well.
+
+When you want to stop the server (due to a hangup or because you need the interactive session for something else), you can reconnect on the cluster to the screen session (by the name you gave it, or the ID it has, see *screen -ls* for example), and killing it with CTRL+C.
 
 
 #### Peregrine cluster
