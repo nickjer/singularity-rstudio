@@ -50,7 +50,9 @@ This will start on the 8787 port. You can modify your vagrant settings to map 87
 
 To use the singularity image on the UMCG HPC gearshift cluster, a bit of setup is required. This is described in step 1. After setting up, only step 2 and 3 need to be repeated for using the image.
 
-1. Choose a location to put all of your files. The home folder on the Gearshift cluster is too small, so preferably set up a directory in one of the group folders you are a member of. For example if you are a member of the 'weersma' group, you can set up a directory in */groups/umcg-weersma/tmp01/user/${USER}/*
+STEP 1
+
+Choose a location to put all of your files. The home folder on the Gearshift cluster is too small, so preferably set up a directory in one of the group folders you are a member of. For example if you are a member of the 'weersma' group, you can set up a directory in */groups/umcg-weersma/tmp01/user/${USER}/*
 
 if there are already singularity folders in your home folder, we need to move them. check if there are the *.singularity* and *singularity* folders in your home directory by using:
 ```sh
@@ -140,10 +142,13 @@ ${TMPDIR}/tmp:/tmp \
 Okay, that was the setup, now to use the container
 
 
-2. open a screen session on the cluster
+STEP 2
 
 If you are using Windows, I am assuming you can use ssh via the (git bash) command line, otherwise you will run into issues when forwarding the ports. If you need help setting up ssh via the command line in Windows, you can use this tutorial: https://ssh-and-rsync-for-windows.readthedocs.io/en/latest/
 Mac OSX and Linux users do not have to worry about this
+
+open a screen session on the cluster
+
 
 ```sh
 screen -S rserver
