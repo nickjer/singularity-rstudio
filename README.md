@@ -141,6 +141,10 @@ Okay, that was the setup, now to use the container
 
 
 2. open a screen session on the cluster
+
+If you are using Windows, I am assuming you can use ssh via the (git bash) command line, otherwise you will run into issues when forwarding the ports. If you need help setting up ssh via the command line in Windows, you can use this tutorial: https://ssh-and-rsync-for-windows.readthedocs.io/en/latest/
+Mac OSX and Linux users do not have to worry about this
+
 ```sh
 screen -S rserver
 ```
