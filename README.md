@@ -133,7 +133,7 @@ ${TMPDIR}/lib:/var/lib/rstudio-server,\
 ${TMPDIR}/etc:/etc/rstudio,\
 ${TMPDIR}/tmp:/tmp \
 /groups/umcg-biogen/tmp01/users/${USER}/singularity/rstudio-server/singularity-rstudio.simg \
---server-user ${USER}\
+--server-user ${USER} \
 --server-data-dir ${TMPDIR}/server-data/ \
 --server-daemonize 0 \
 --secure-cookie-key-file ~/server-data/rserver_cookie
@@ -192,6 +192,20 @@ When you want to stop the server (due to a hangup or because you need the intera
 
 Using the settings supplied in the examples here, you will have a home directory for the image, that is separate from your regular home directory. This will allow you to install additional R libraries to use with the container, without it interfering with locaal R installations. (The simulated home directory for the example would be */groups/umcg-weersma/tmp01/users/${USER}/singularity/rstudio-server/simulated_home/*)
 
+
+STEP 3
+
+Of course when you are running sbatch jobs, you would prefer to use the same R version that you are using for your interactive sessions. This is easily achieved by creating a shell script that calls the Singularity container. For example this script *start_Rscript.sh* in the home directory:
+
+```sh
+#!/bin/bash
+singularity exec --bind /groups/umcg-weersma/tmp01/users/${USER}/singularity/rstudio-server/simulated_home:/home/${USER},\
+/groups/umcg-weersma/tmp01/ \
+/groups/umcg-weersma/tmp01/users/${USER}/singularity/rstudio-server/singularity-rstudio.simg \
+Rscript $@
+```
+
+You can then use *~/start_Rscript.sh* instead of the usual *Rscript* command to use the container.
 
 #### Peregrine cluster
 
