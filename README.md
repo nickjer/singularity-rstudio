@@ -108,7 +108,7 @@ ${TMPDIR}/lib:/var/lib/rstudio-server,\
 ${TMPDIR}/etc:/etc/rstudio,\
 ${TMPDIR}/tmp:/tmp \
 /groups/umcg-weersma/tmp01/users/${USER}/singularity/rstudio-server/singularity-rstudio.simg \
---server-user ${USER}\
+--server-user ${USER} \
 --server-data-dir ${TMPDIR}/server-data/ \
 --server-daemonize 0 \
 --secure-cookie-key-file ~/server-data/rserver_cookie
